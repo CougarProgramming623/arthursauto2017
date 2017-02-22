@@ -88,9 +88,9 @@ void DistanceDriveCommand::Execute() {
 	   }
 
 	  double accelGyro[2]={0,0};
-	  accelGyro[0] = -1*RobotMap::ahrs->GetWorldLinearAccelX()*kGravity;
+	  accelGyro[0] = RobotMap::ahrs->GetWorldLinearAccelX()*kGravity;
 	  //GetDisplacementY
-	  accelGyro[1] = -1*RobotMap::ahrs->GetWorldLinearAccelY()*kGravity;
+	  accelGyro[1] = RobotMap::ahrs->GetWorldLinearAccelY()*kGravity;
 
 	  for ( int i = 0; i < 2; i++ ) {
 		  lastPosEst[i] = lastPosEst[i] + lastVelEst[i]*deltaT + 0.5*deltaT*deltaT*lastAccelEst[i];
@@ -108,7 +108,7 @@ void DistanceDriveCommand::Execute() {
 
 	  for ( int i = 0; i < 2; i++ ) {
 		  if(abs(accelGyro[i])<20){
-			  lastVelEst[i]=lastVelEst[i]+lastAccelEst[i]*deltaT;
+			  lastVelEst[i]=lastVelEst[i] + lastAccelEst[i]*deltaT;
 			  lastAccelEst[i]=accelGyro[i];
 		  }
 	  }
