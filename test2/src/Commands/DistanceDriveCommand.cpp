@@ -88,28 +88,41 @@ void DistanceDriveCommand::Execute() {
 	   }
 
 	  double accelGyro[2]={0,0};
-	  accelGyro[0] = RobotMap::ahrs->GetWorldLinearAccelX()*kGravity;
+	  accelGyro[0] = -1*RobotMap::ahrs->GetWorldLinearAccelX()*kGravity;
 	  //GetDisplacementY
-	  accelGyro[1] = RobotMap::ahrs->GetWorldLinearAccelY()*kGravity;
+	  accelGyro[1] = -1*RobotMap::ahrs->GetWorldLinearAccelY()*kGravity;
 
 	  for ( int i = 0; i < 2; i++ ) {
 		  lastPosEst[i] = lastPosEst[i] + lastVelEst[i]*deltaT + 0.5*deltaT*deltaT*lastAccelEst[i];
 	  }
+	  SmartDashboard::PutNumber("WorldLinearAccelY", RobotMap::ahrs->GetWorldLinearAccelY());
+	  SmartDashboard::PutNumber("Last Position X", lastPosEst[0]);
+	  SmartDashboard::PutNumber("Last Position Y", lastPosEst[1]);
+	  SmartDashboard::PutNumber("Accel Gyro X", accelGyro[0]);
+	  SmartDashboard::PutNumber("Accel Gyro Y", accelGyro[1]);
+
+		std::ostringstream s1;
+		s1 << lastPosEst[1];
+		std::string lastPosY(s1.str());
+	  DriverStation::ReportError(lastPosY);
 
 	  for ( int i = 0; i < 2; i++ ) {
-		  lastVelEst[i]=lastVelEst[i]+lastAccelEst[i]*deltaT;
-		  lastAccelEst[i]=accelGyro[i];
+		  if(abs(accelGyro[i])<20){
+			  lastVelEst[i]=lastVelEst[i]+lastAccelEst[i]*deltaT;
+			  lastAccelEst[i]=accelGyro[i];
+		  }
 	  }
 
 	  double angle = RobotMap::ahrs->GetYaw();
 	  //Robot::subsystemDrive->ArcadeDrive(1,  -angle * kP, true);
 
-	  Robot::subsystemDrive->ArcadeDrive(1, rotateToAngleRate, true);
+	  Robot::subsystemDrive->ArcadeDrive(0.75, rotateToAngleRate, true);
 
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool DistanceDriveCommand::IsFinished() {
+
 	if(lastPosEst[1]>m_distance)
 		return true;
     return false;

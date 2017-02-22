@@ -35,17 +35,22 @@ void RobotMap::init() {
     subsystemDrivetreadLeftFront.reset(new CANTalon(1));
     lw->AddActuator("SubsystemDrive", "treadLeftFront", std::static_pointer_cast<CANTalon>(subsystemDrivetreadLeftFront));
     
-    subsystemDrivetreadLeftBack.reset(new CANTalon(0));
+    subsystemDrivetreadLeftBack.reset(new CANTalon(2));
     lw->AddActuator("SubsystemDrive", "treadLeftBack", std::static_pointer_cast<CANTalon>(subsystemDrivetreadLeftBack));
     
-    subsystemDrivetreadRightBack.reset(new CANTalon(2));
+    subsystemDrivetreadRightBack.reset(new CANTalon(4));
     lw->AddActuator("SubsystemDrive", "treadRightBack", std::static_pointer_cast<CANTalon>(subsystemDrivetreadRightBack));
     
     subsystemDrivetreadRightFront.reset(new CANTalon(3));
     lw->AddActuator("SubsystemDrive", "treadRightFront", std::static_pointer_cast<CANTalon>(subsystemDrivetreadRightFront));
     
-    subsystemDriveRobotDrive41.reset(new RobotDrive(subsystemDrivetreadLeftFront, subsystemDrivetreadLeftBack,
-              subsystemDrivetreadRightFront, subsystemDrivetreadRightBack));
+    subsystemDrivetreadLeftBack->SetControlMode(CANSpeedController::kFollower);
+    subsystemDrivetreadLeftBack->Set(1);
+
+    subsystemDrivetreadRightBack->SetControlMode(CANSpeedController::kFollower);
+    subsystemDrivetreadRightBack->Set(3);
+
+    subsystemDriveRobotDrive41.reset(new RobotDrive(subsystemDrivetreadLeftFront, subsystemDrivetreadRightFront));
     
     subsystemDriveRobotDrive41->SetSafetyEnabled(false);
         subsystemDriveRobotDrive41->SetExpiration(0.1);

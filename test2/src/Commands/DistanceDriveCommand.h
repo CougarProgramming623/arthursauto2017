@@ -42,7 +42,7 @@ private:
 
 	Timer* m_resetTimer;
 	double deltaT = 0.0;
-	double m_distance=0.0;
+	double m_distance=1.0;
     double kDefaultPeriod = .05;
 	double kGravity = 32.174;
 
