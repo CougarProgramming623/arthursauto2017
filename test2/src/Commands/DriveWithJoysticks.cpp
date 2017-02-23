@@ -56,7 +56,7 @@ void DriveWithJoysticks::Execute() {
 	std::string pitch(ss.str());
 
 
-	DriverStation::ReportError(pitch);
+	//DriverStation::ReportError(pitch);
 
 }
 

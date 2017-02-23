@@ -45,6 +45,7 @@ void DistanceDriveCommand::Initialize() {
 	            /* Communicate w/navX-MXP via the MXP SPI Bus.                                       */
 	            /* Alternatively:  I2C::Port::kMXP, SerialPort::Port::kMXP or SerialPort::Port::kUSB */
 	            /* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details.   */
+		  DriverStation::ReportError("First time for distance command");
 
 	            RobotMap::RobotMap::ahrs->ZeroYaw();
 
@@ -66,6 +67,12 @@ void DistanceDriveCommand::Initialize() {
 			//to keep it run straight
 			turnController->SetSetpoint(0.0f);
 
+			for ( int i = 0; i < 2; i++ ) {
+					  lastPosEst[i] =0;
+					  lastVelEst[i] =0;
+					  lastAccelEst[i] =0;
+				  }
+
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -78,7 +85,7 @@ void DistanceDriveCommand::Execute() {
 	std::string yaw(ss.str());
 
 
-	DriverStation::ReportError(yaw);
+	//DriverStation::ReportError(yaw);
 
 	  deltaT = m_resetTimer->Get();
 	  m_resetTimer->Reset();
@@ -95,44 +102,70 @@ void DistanceDriveCommand::Execute() {
 	  for ( int i = 0; i < 2; i++ ) {
 		  lastPosEst[i] = lastPosEst[i] + lastVelEst[i]*deltaT + 0.5*deltaT*deltaT*lastAccelEst[i];
 	  }
-	  SmartDashboard::PutNumber("WorldLinearAccelY", RobotMap::ahrs->GetWorldLinearAccelY());
-	  SmartDashboard::PutNumber("Last Position X", lastPosEst[0]);
-	  SmartDashboard::PutNumber("Last Position Y", lastPosEst[1]);
-	  SmartDashboard::PutNumber("Accel Gyro X", accelGyro[0]);
-	  SmartDashboard::PutNumber("Accel Gyro Y", accelGyro[1]);
+	  //SmartDashboard::PutNumber("WorldLinearAccelY", RobotMap::ahrs->GetWorldLinearAccelY());
+	  //SmartDashboard::PutNumber("Last Position X", lastPosEst[0]);
+	  //SmartDashboard::PutNumber("Last Position Y", lastPosEst[1]);
+	  //SmartDashboard::PutNumber("Accel Gyro X", accelGyro[0]);
+	  //SmartDashboard::PutNumber("Accel Gyro Y", accelGyro[1]);
+
 
 		std::ostringstream s1;
 		s1 << lastPosEst[1];
 		std::string lastPosY(s1.str());
-	  DriverStation::ReportError(lastPosY);
+		std::ostringstream s2;
+		s2 << accelGyro[1];
+		std::string GyroY(s2.str());
+		std::ostringstream s3;
+		s3 << deltaT;
+		std::string Time(s3.str());
+
+	  DriverStation::ReportError("Gyro Y: " + GyroY);
+	  DriverStation::ReportError("Last Pos Y: " + lastPosY);
+	  DriverStation::ReportError("Time: " + Time);
 
 	  for ( int i = 0; i < 2; i++ ) {
 		  if(abs(accelGyro[i])<20){
-			  lastVelEst[i]=lastVelEst[i]+lastAccelEst[i]*deltaT;
-			  lastAccelEst[i]=accelGyro[i];
+			  if(accelGyro[i]>0)
+				  accelGyro[i]=20;
+			  else if(accelGyro[i]<0)
+			  	  accelGyro[i]=-20;
 		  }
+
+		  lastVelEst[i]=lastVelEst[i]+lastAccelEst[i]*deltaT;
+		  lastAccelEst[i]=accelGyro[i];
 	  }
 
 	  double angle = RobotMap::ahrs->GetYaw();
 	  //Robot::subsystemDrive->ArcadeDrive(1,  -angle * kP, true);
-
+	  if (m_distance < 0) {
+		  Robot::subsystemDrive->ArcadeDrive(-0.75, rotateToAngleRate, true);
+	  } else {
 	  Robot::subsystemDrive->ArcadeDrive(0.75, rotateToAngleRate, true);
-
+	  }
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool DistanceDriveCommand::IsFinished() {
 
-	if(lastPosEst[1]>m_distance)
+	if(lastPosEst[1]>m_distance && m_distance>0)
+		return true;
+	else if(lastPosEst[1]<m_distance && m_distance<0)
 		return true;
     return false;
 }
 
 // Called once after isFinished returns true
 void DistanceDriveCommand::End() {
+	DriverStation::ReportError("ending in commands");
 	Robot::subsystemDrive->ArcadeDrive(0, 0, true);
 	m_distance=0;
 	turnController->Disable();
+	m_resetTimer->Reset();
+	  for ( int i = 0; i < 2; i++ ) {
+		  lastPosEst[i] =0;
+		  lastVelEst[i] =0;
+		  lastAccelEst[i] =0;
+	  }
 }
 
 // Called when another command which requires one or more of the same

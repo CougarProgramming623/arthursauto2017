@@ -30,14 +30,14 @@ void AutonomousCommand::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void AutonomousCommand::Execute() {
-	DriverStation::ReportError("execution yaw");
+	//DriverStation::ReportError("execution yaw");
 
-	std::ostringstream ss;
-	ss << RobotMap::ahrs->GetYaw();
-	std::string yaw(ss.str());
+	//std::ostringstream ss;
+	//ss << RobotMap::ahrs->GetYaw();
+	//std::string yaw(ss.str());
 
 
-	DriverStation::ReportError(yaw);
+	//DriverStation::ReportError(yaw);
 
 	//DriverStation::ReportError(roll);
 

@@ -55,7 +55,7 @@ void Robot::DisabledPeriodic() {
 
 void Robot::AutonomousInit() {
 
-	autonomousCommand.reset(new DistanceDriveCommand(2.0));
+	autonomousCommand.reset(new DistanceDriveCommand(-2.0));
 
 	if (autonomousCommand.get() != nullptr)
 		autonomousCommand->Start();
