@@ -124,12 +124,12 @@ void DistanceDriveCommand::Execute() {
 	  DriverStation::ReportError("Time: " + Time);
 
 	  for ( int i = 0; i < 2; i++ ) {
-		  if(abs(accelGyro[i])<20){
+		  /*if(abs(accelGyro[i])<10){
 			  if(accelGyro[i]>0)
-				  accelGyro[i]=20;
+				  accelGyro[i]=0;
 			  else if(accelGyro[i]<0)
-			  	  accelGyro[i]=-20;
-		  }
+			  	  accelGyro[i]=0;
+		  } */
 
 		  lastVelEst[i]=lastVelEst[i]+lastAccelEst[i]*deltaT;
 		  lastAccelEst[i]=accelGyro[i];
@@ -151,7 +151,9 @@ bool DistanceDriveCommand::IsFinished() {
 		return true;
 	else if(lastPosEst[1]<m_distance && m_distance<0)
 		return true;
-    return false;
+	else {
+		return false;
+	}
 }
 
 // Called once after isFinished returns true
