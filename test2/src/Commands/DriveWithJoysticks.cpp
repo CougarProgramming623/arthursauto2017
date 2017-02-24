@@ -40,24 +40,24 @@ void DriveWithJoysticks::Execute() {
 		YAxis = 0;
 	}
 	else {
-		YAxis *= fabs(YAxis);
+		//YAxis *= fabs(YAxis);
 	}
 
 	if (RotAxis > -0.20 && RotAxis < 0.20) {
 		RotAxis = 0;
 	}
 	else {
-		RotAxis *= fabs(RotAxis);
+		//RotAxis *= fabs(RotAxis);
 	}
-	Robot::subsystemDrive->ArcadeDrive(-YAxis, -RotAxis, true);
+	Robot::subsystemDrive->ArcadeDrive(YAxis, RotAxis, true);
 
-	std::ostringstream ss;
+	/*std::ostringstream ss;
 	ss << RobotMap::ahrs->GetPitch();
 	std::string pitch(ss.str());
 
 
 	DriverStation::ReportError(pitch);
-
+    */
 }
 
 // Make this return true when this Command no longer needs to run execute()
