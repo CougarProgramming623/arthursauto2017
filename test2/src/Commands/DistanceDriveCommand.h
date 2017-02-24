@@ -49,6 +49,10 @@ private:
 	 double  lastAccelEst[2];
 	 double  lastVelEst[2];
 	 double lastPosEst[2] ;
+
+		PIDController *turnController;      // PID Controller
+
+		double rotateToAngleRate;
 };
 
 #endif

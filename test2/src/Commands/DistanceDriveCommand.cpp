@@ -27,9 +27,7 @@
 
 	const static double kToleranceDegrees = 2.0f;
 
-	PIDController *turnController;      // PID Controller
 
-	double rotateToAngleRate;
 
 DistanceDriveCommand::DistanceDriveCommand(double distance): Command() {
 	m_distance=distance;
@@ -42,6 +40,7 @@ void DistanceDriveCommand::Initialize() {
 
 
 	try {
+		DriverStation::ReportError("DistanceDriveCommand init");
 	            /* Communicate w/navX-MXP via the MXP SPI Bus.                                       */
 	            /* Alternatively:  I2C::Port::kMXP, SerialPort::Port::kMXP or SerialPort::Port::kUSB */
 	            /* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details.   */
@@ -66,6 +65,13 @@ void DistanceDriveCommand::Initialize() {
 			//to keep it run straight
 			turnController->SetSetpoint(0.0f);
 
+			for(int i=0; i<2;i++)
+			{
+				 lastPosEst[i] =0;
+				 lastVelEst[i] =0;
+				 lastAccelEst[i]=0;
+			}
+
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -73,12 +79,7 @@ void DistanceDriveCommand::Execute() {
 
 	DriverStation::ReportError("execution in distanceDrive");
 
-	std::ostringstream ss;
-	ss << RobotMap::ahrs->GetYaw();
-	std::string yaw(ss.str());
-
-
-	DriverStation::ReportError(yaw);
+	DriverStation::ReportError("yawn is:" +std::to_string( RobotMap::ahrs->GetYaw()));
 
 	  deltaT = m_resetTimer->Get();
 	  m_resetTimer->Reset();
@@ -103,23 +104,37 @@ void DistanceDriveCommand::Execute() {
 
 	  double angle = RobotMap::ahrs->GetYaw();
 	  //Robot::subsystemDrive->ArcadeDrive(1,  -angle * kP, true);
+	  if(m_distance<0)
+	    Robot::subsystemDrive->ArcadeDrive(-0.75, rotateToAngleRate, true);
+	  else
+		  Robot::subsystemDrive->ArcadeDrive(0.75, rotateToAngleRate, true);
 
-	  Robot::subsystemDrive->ArcadeDrive(1, rotateToAngleRate, true);
-
+	  DriverStation::ReportError( "lastPosEst[1] is:"+ std::to_string( lastPosEst[1]));
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool DistanceDriveCommand::IsFinished() {
-	if(lastPosEst[1]>m_distance)
+	if(lastPosEst[1]>m_distance && m_distance>0)
+		return true;
+	else if(lastPosEst[1]<m_distance && m_distance<0)
 		return true;
     return false;
 }
 
 // Called once after isFinished returns true
 void DistanceDriveCommand::End() {
+	DriverStation::ReportError("DistanceDriveCommand end");
+
 	Robot::subsystemDrive->ArcadeDrive(0, 0, true);
-	m_distance=0;
 	turnController->Disable();
+	m_resetTimer->Reset();
+
+	for(int i=0; i<2;i++)
+	{
+		 lastPosEst[i] =0;
+		 lastVelEst[i] =0;
+		 lastAccelEst[i]=0;
+	}
 }
 
 // Called when another command which requires one or more of the same
