@@ -7,6 +7,7 @@ AutoCommandGroup::AutoCommandGroup() {
 
 	AddSequential(new DistanceDriveCommand(2.0));
 	AddSequential(new DistanceDriveCommand(-2.0));
+	AddSequential(new Turn(90.0));
 
 	//AddSequential(new SolenoidClaspCommand(1));
 
