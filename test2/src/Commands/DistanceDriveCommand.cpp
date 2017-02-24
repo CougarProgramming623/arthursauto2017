@@ -123,12 +123,12 @@ void DistanceDriveCommand::Execute() {
       DriverStation::ReportError("Time: " + Time);
 
       for ( int i = 0; i < 2; i++ ) {
-          /*if(abs(accelGyro[i])<10){
+          if(abs(accelGyro[i])<10){
               if(accelGyro[i]>0)
-                  accelGyro[i]=0;
+                  accelGyro[i]=10;
               else if(accelGyro[i]<0)
-                    accelGyro[i]=0;
-          } */
+                    accelGyro[i]=-10;
+          }
 
           lastVelEst[i]=lastVelEst[i]+lastAccelEst[i]*deltaT;
           lastAccelEst[i]=accelGyro[i];
