@@ -18,9 +18,9 @@ AutoCommandGroup::AutoCommandGroup(int option1) : CommandGroup() {
 	AddSequential(new WaitTime(2));
 	AddSequential(new SolenoidClaspCommand(0, 1));
 	AddSequential(new WaitTime(3));
-	AddSequential(new DistanceDriveCommand(-2.0));
-//	AddSequential(new Turn(-59.9f));
-	AddSequential(new DistanceDriveCommand(-1.0));
+	AddSequential(new DistanceDriveCommand(2.0));
+	AddSequential(new Turn(-59.9f));
+	AddSequential(new DistanceDriveCommand(1.0));
     //option will be 0, 1, 2
 
 //	AddSequential(new DistanceDriveCommand2(1.0));
