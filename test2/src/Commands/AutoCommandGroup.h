@@ -17,7 +17,8 @@ class AutoCommandGroup : public CommandGroup
 {
 
   public:
-   AutoCommandGroup();
+   AutoCommandGroup(int);
+   int option;// will be 0, 1, 2 or nothing
 
 };
 
