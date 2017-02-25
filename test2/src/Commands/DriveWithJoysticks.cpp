@@ -39,16 +39,12 @@ void DriveWithJoysticks::Execute() {
 	if (YAxis > -0.20 && YAxis < 0.20) {
 		YAxis = 0;
 	}
-	else {
-		//YAxis *= fabs(YAxis);
-	}
+
 
 	if (RotAxis > -0.20 && RotAxis < 0.20) {
 		RotAxis = 0;
 	}
-	else {
-		//RotAxis *= fabs(RotAxis);
-	}
+
 	Robot::subsystemDrive->ArcadeDrive(YAxis, RotAxis, true);
 
 	/*std::ostringstream ss;

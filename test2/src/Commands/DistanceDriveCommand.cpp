@@ -110,6 +110,8 @@ void DistanceDriveCommand::Execute() {
 		  Robot::subsystemDrive->ArcadeDrive(0.75, rotateToAngleRate, true);
 
 	  DriverStation::ReportError( "lastPosEst[1] is:"+ std::to_string( lastPosEst[1]));
+	  DriverStation::ReportError( "accelGyro is:"+ std::to_string( accelGyro[1]));
+
 }
 
 // Make this return true when this Command no longer needs to run execute()

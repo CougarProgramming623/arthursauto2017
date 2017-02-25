@@ -62,12 +62,18 @@ void RobotMap::init() {
     cantalonLeftBack=new CANTalon(2);
     cantalonRightBack=new CANTalon(4);
     cantalonRightFront=new CANTalon(3);
+    cantalonLeftBack->SetControlMode(CANTalon::kFollower);
+    cantalonLeftBack->Set(1);
+
+    cantalonRightBack->SetControlMode(CANTalon::kFollower);
+    cantalonRightBack->Set(3);
+
     cantalonLeftFront->SetInverted(true);
     cantalonLeftBack->SetInverted(true);
     cantalonRightBack->SetInverted(true);
     cantalonRightFront->SetInverted(true);
 
-    subsystemDriveRobotDrive41.reset(new RobotDrive(cantalonLeftFront,cantalonLeftBack,cantalonRightBack,cantalonRightFront));
+    subsystemDriveRobotDrive41.reset(new RobotDrive(cantalonLeftFront,cantalonRightFront));
     lw->AddActuator("SubsystemDrive", "treadLeftFront", cantalonLeftFront);
     lw->AddActuator("SubsystemDrive", "treadLeftBack", cantalonLeftBack);
     lw->AddActuator("SubsystemDrive", "treadRightBack", cantalonRightBack);
