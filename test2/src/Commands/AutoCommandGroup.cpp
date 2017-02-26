@@ -15,8 +15,8 @@ AutoCommandGroup::AutoCommandGroup(int option1) : CommandGroup() {
 		return;
 
 	AddSequential(new DistanceDriveCommand2(24.0)); //24 inches
-		AddSequential(new Turn(59.9f));
-		AddSequential(new DistanceDriveCommand2(12.0));
+	AddSequential(new Turn(59.9f));
+	AddSequential(new DistanceDriveCommand2(12.0));
 
 	/*
 ..
