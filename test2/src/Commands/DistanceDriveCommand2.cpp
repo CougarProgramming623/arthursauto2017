@@ -102,12 +102,12 @@ void DistanceDriveCommand2::Execute() {
 	//DriverStation::ReportError(" rev is:" +std::to_string((getPosition()-initEncPosition)/(1440*4.0)));
 
 
-	  double angle = RobotMap::ahrs->GetYaw();
+	//  double angle = RobotMap::ahrs->GetYaw();
 	  //Robot::subsystemDrive->ArcadeDrive(1,  -angle * kP, true);
 	  if(m_distance<0)
 	    Robot::subsystemDrive->ArcadeDrive(0.75, rotateToAngleRate, true);  //y speed is reversed
 	  else
-		  Robot::subsystemDrive->ArcadeDrive(+0.75, rotateToAngleRate, true);
+		  Robot::subsystemDrive->ArcadeDrive(-0.75, rotateToAngleRate, true);
 
 }
 
