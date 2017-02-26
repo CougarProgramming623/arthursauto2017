@@ -106,6 +106,8 @@ void Robot::TeleopInit() {
 
 void Robot::TeleopPeriodic() {
 	Scheduler::GetInstance()->Run();
+//	DriverStation::ReportError("encoder  is:" +std::to_string( RobotMap::cantalonLeftFront->GetEncPosition()));
+
 }
 
 void Robot::TestPeriodic() {

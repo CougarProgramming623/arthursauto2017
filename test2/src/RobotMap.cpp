@@ -83,7 +83,7 @@ void RobotMap::init() {
     cantalonLeftFront->ConfigEncoderCodesPerRev(360);
     double position = 0;
     //cantalonLeftFront->SetPosition(position);
-    //cantalonLeftFront->SetEncPosition(0);
+    cantalonLeftFront->SetEncPosition(0);
     //cantalonLeftFront->ConfigForwardLimit(15);
     //cantalonLeftFront->ConfigReverseLimit(-15);
 
