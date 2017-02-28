@@ -49,5 +49,3 @@ void Climb::Interrupted() {
 
 
 
-
-
