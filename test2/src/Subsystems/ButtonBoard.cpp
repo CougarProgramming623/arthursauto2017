@@ -7,6 +7,7 @@
 #include "ButtonBoard.h"
 #include "../RobotMap.h"
 #include "../Commands/SolenoidClaspCommand.h"
+#include "../Commands/Climb.h"
 
 ButtonBoard::ButtonBoard(int port):Joystick(port){
 	gearClose = new JoystickButton(this, PORT_GEAR_CLOSE);
@@ -26,6 +27,10 @@ ButtonBoard::ButtonBoard(int port):Joystick(port){
 
 	fastSpeed->WhenPressed(new SolenoidClaspCommand(0, 2));
 	slowSpeed->WhenPressed(new SolenoidClaspCommand(1, 2));
+
+	//fastSpeed->WhenPressed(new Climb(1.0));
+	fastSpeed->WhileHeld(new Climb(1.0));
+	slowSpeed->WhenPressed(new Climb(0));
 }
 ButtonBoard::~ButtonBoard(){
 	delete gearClose;
