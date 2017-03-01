@@ -16,7 +16,7 @@ ButtonBoard::ButtonBoard(int port):Joystick(port){
 	armDown = new JoystickButton(this, PORT_ARM_DOWN);
 	fastSpeed = new JoystickButton(this, PORT_FAST_SPEED);
 	slowSpeed = new JoystickButton(this, PORT_SLOW_SPEED);
-	//climbRope = new JoystickButton(this, PORT_CLIMB_ROPE);
+	climbRope = new JoystickButton(this, PORT_CLIMB_ROPE);
 	//robotUp = new JoystickButton(this, PORT_ROBOT_UP);
 
 	gearClose->WhenPressed(new SolenoidClaspCommand(0, 0));
@@ -28,9 +28,7 @@ ButtonBoard::ButtonBoard(int port):Joystick(port){
 	fastSpeed->WhenPressed(new SolenoidClaspCommand(0, 2));
 	slowSpeed->WhenPressed(new SolenoidClaspCommand(1, 2));
 
-	//fastSpeed->WhenPressed(new Climb(1.0));
-	fastSpeed->WhileHeld(new Climb(1.0));
-	slowSpeed->WhenPressed(new Climb(0));
+	climbRope->WhileHeld(new Climb(1.0));
 }
 ButtonBoard::~ButtonBoard(){
 	delete gearClose;
@@ -39,6 +37,7 @@ ButtonBoard::~ButtonBoard(){
 	delete armDown;
 	delete fastSpeed;
 	delete slowSpeed;
+	delete climbRope;
 }
 
 

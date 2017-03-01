@@ -13,12 +13,14 @@ const static int SMALL_TIME_OUT=3;
 
 AutoCommandGroup::AutoCommandGroup(int option1) : CommandGroup() {
 	option=option1;
-	if(option==-1)
+	if(option==-1){
+		AddSequential(new DistanceDriveCommand2(60.0, BIG_TIME_OUT));
+		AddSequential(new Turn(59.9f));
+		AddSequential(new DistanceDriveCommand2(24.0, BIG_TIME_OUT));
 		return;
 
-	AddSequential(new DistanceDriveCommand2(24.0, BIG_TIME_OUT)); //24 inches
-	AddSequential(new Turn(59.9f));
-	AddSequential(new DistanceDriveCommand2(12.0, BIG_TIME_OUT));
+	}
+
 
 	/*
 ..
@@ -34,8 +36,8 @@ AutoCommandGroup::AutoCommandGroup(int option1) : CommandGroup() {
 
 		*/
 
-		if(1==1)
-			return;
+		//if(1==1)
+		//	return;
 
 		//REAL SCENORY
 		if(option==0) //in the field left sided, and try to turn right
