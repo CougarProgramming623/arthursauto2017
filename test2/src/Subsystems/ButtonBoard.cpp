@@ -29,6 +29,8 @@ ButtonBoard::ButtonBoard(int port):Joystick(port){
 	slowSpeed->WhenPressed(new SolenoidClaspCommand(1, 2));
 
 	climbRope->WhileHeld(new Climb(1.0));
+	//climbRope->WhenReleased(new Climb(0.0));
+
 }
 ButtonBoard::~ButtonBoard(){
 	delete gearClose;

@@ -55,12 +55,12 @@ void Turn::Execute() {
 	double finishAngle = RobotMap::ahrs->GetYaw();
 	DriverStation::ReportError("running:"+ std::to_string(finishAngle));
 
-	double currentRotationRate;
-	if (abs(finishAngle - m_angle) <= 10) {
+	double currentRotationRate = 0.3;
+	/*if (abs(finishAngle - m_angle) <= 10) {
 		currentRotationRate = 0.3;
 	} else {
-		currentRotationRate = 0.5;
-	}
+		currentRotationRate = 0.3;
+	}*/
 	if (m_angle < 0) {
 		Robot::subsystemDrive->ArcadeDrive(0, -currentRotationRate, true);
 	} else {

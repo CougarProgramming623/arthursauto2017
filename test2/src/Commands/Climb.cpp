@@ -16,7 +16,7 @@ Climb::Climb(double speed): Command() {
 }
 
 void Climb::Initialize() {
-
+	DriverStation::ReportError("Climb initialize" + std::to_string(m_speed));
 
 }
 
@@ -24,7 +24,7 @@ void Climb::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void Climb::Execute() {
 	RobotMap::cantalonClimb->Set(m_speed);
-
+	DriverStation::ReportError("Climb execute" + std::to_string(m_speed));
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -35,8 +35,8 @@ bool Climb::IsFinished() {
 
 // Called once after isFinished returns true
 void Climb::End() {
-	DriverStation::ReportError("Climb end");
-	RobotMap::cantalonClimb->Set(0);
+	DriverStation::ReportError("Climb end"+ std::to_string(m_speed));
+	//RobotMap::cantalonClimb->Set(0);
 }
 
 // Called when another command which requires one or more of the same

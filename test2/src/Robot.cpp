@@ -48,9 +48,9 @@ void Robot::RobotInit() {
 	//autonomousCommand.reset(new AutonomousCommand());
 
 
-	DriverStation::ReportError("digital input 0 is:" +std::to_string( RobotMap::digitalInput0->Get()));
-	DriverStation::ReportError("digital input 1 is:" +std::to_string( RobotMap::digitalInput1->Get()));
-	DriverStation::ReportError("digital input 2 is:" +std::to_string( RobotMap::digitalInput2->Get()));
+	//DriverStation::ReportError("digital input 0 is:" +std::to_string( RobotMap::digitalInput0->Get()));
+	//DriverStation::ReportError("digital input 1 is:" +std::to_string( RobotMap::digitalInput1->Get()));
+	//DriverStation::ReportError("digital input 2 is:" +std::to_string( RobotMap::digitalInput2->Get()));
 
 
 	int option=-1;
@@ -98,6 +98,7 @@ void Robot::AutonomousInit() {
 
 void Robot::AutonomousPeriodic() {
 	Scheduler::GetInstance()->Run();
+
 
 	//DriverStation::ReportError("digital input 0 is:" +std::to_string( RobotMap::digitalInput0->Get()));
 	//DriverStation::ReportError("digital input 1 is:" +std::to_string( RobotMap::digitalInput1->Get()));

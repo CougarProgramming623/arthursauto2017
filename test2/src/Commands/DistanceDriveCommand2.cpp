@@ -23,7 +23,7 @@
 	const static double kToleranceDegrees = 2.0f;
 
 	//const static double FEET_PER_REV = 0.472;
-	const static double FEET_PER_TICK = 0.0075798671880189729283801;
+	const static double FEET_PER_TICK = 0.00541847;
 
 
 	int counter=0;
@@ -103,10 +103,21 @@ void DistanceDriveCommand2::Execute() {
 
 	//  double angle = RobotMap::ahrs->GetYaw();
 	  //Robot::subsystemDrive->ArcadeDrive(1,  -angle * kP, true);
-	  if(m_distance<0)
+	 /* if(m_distance<0)
 	    Robot::subsystemDrive->ArcadeDrive(0.75, rotateToAngleRate, true);  //y speed is reversed
 	  else
 		  Robot::subsystemDrive->ArcadeDrive(-0.75, rotateToAngleRate, true);
+	  */
+	  if(m_distance<0)
+	    Robot::subsystemDrive->ArcadeDrive(0.5, rotateToAngleRate, true);  //y speed is reversed
+	  else
+		  Robot::subsystemDrive->ArcadeDrive(-0.5, rotateToAngleRate, true);
+/*
+	  if(m_distance<0)
+	    Robot::subsystemDrive->ArcadeDrive(0.3, rotateToAngleRate, true);  //y speed is reversed
+	  else
+		  Robot::subsystemDrive->ArcadeDrive(-0.3, rotateToAngleRate, true);
+*/
 
 }
 
@@ -122,9 +133,12 @@ bool DistanceDriveCommand2::IsFinished() {
 
 // Called once after isFinished returns true
 void DistanceDriveCommand2::End() {
-	DriverStation::ReportError("DistanceDriveCommand end");
+	DriverStation::ReportError("DistanceDriveCommand end initial:"+initEncPosition);
+
 
 	initEncPosition=getPosition();
+	DriverStation::ReportError("DistanceDriveCommand end:"+initEncPosition);
+
 	//m_distance=0;
 
 	Robot::subsystemDrive->ArcadeDrive(0, 0, true);
