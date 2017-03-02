@@ -23,16 +23,17 @@
 	const static double kToleranceDegrees = 2.0f;
 
 	//const static double FEET_PER_REV = 0.472;
-	const static double FEET_PER_TICK = 0.00541847;
+	const static double INCH_PER_TICK = 0.00541847;
 
 
 	int counter=0;
 
 
 
-DistanceDriveCommand2::DistanceDriveCommand2(double distance, int timeout): Command() {
+DistanceDriveCommand2::DistanceDriveCommand2(double distance, double speed, int timeout): Command() {
 	m_distance=distance;
 	m_timeout=timeout;
+	m_speed=speed;
 	Requires(Robot::subsystemDrive.get());
 
 }
@@ -84,13 +85,14 @@ void DistanceDriveCommand2::Initialize() {
 double  DistanceDriveCommand2::getDriveDistance()
 {
 	//return (getPosition()-initEncPosition)*FEET_PER_REV/(1440*4.0);
-	return (getPosition()-initEncPosition)*FEET_PER_TICK;
+	return (getPosition()-initEncPosition)*INCH_PER_TICK;
 
 }
 
 int DistanceDriveCommand2::getPosition()
 {
 	return RobotMap::cantalonLeftFront->GetEncPosition();
+	//return (RobotMap::cantalonLeftFront->GetEncPosition() + RobotMap::cantalonRightFront->GetEncPosition())/2;
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -109,9 +111,9 @@ void DistanceDriveCommand2::Execute() {
 		  Robot::subsystemDrive->ArcadeDrive(-0.75, rotateToAngleRate, true);
 	  */
 	  if(m_distance<0)
-	    Robot::subsystemDrive->ArcadeDrive(0.5, rotateToAngleRate, true);  //y speed is reversed
+	    Robot::subsystemDrive->ArcadeDrive(m_speed, rotateToAngleRate, true);  //y speed is reversed
 	  else
-		  Robot::subsystemDrive->ArcadeDrive(-0.5, rotateToAngleRate, true);
+		  Robot::subsystemDrive->ArcadeDrive(-m_speed, rotateToAngleRate, true);
 /*
 	  if(m_distance<0)
 	    Robot::subsystemDrive->ArcadeDrive(0.3, rotateToAngleRate, true);  //y speed is reversed

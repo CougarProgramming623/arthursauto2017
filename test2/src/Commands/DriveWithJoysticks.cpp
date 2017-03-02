@@ -41,9 +41,9 @@ void DriveWithJoysticks::Execute() {
 	}
 
 
-	if (RotAxis > -0.20 && RotAxis < 0.20) {
+	/*if (RotAxis > -0.20 && RotAxis < 0.20) {
 		RotAxis = 0;
-	}
+	}*/
 
 	Robot::subsystemDrive->ArcadeDrive(YAxis, RotAxis, true);
 

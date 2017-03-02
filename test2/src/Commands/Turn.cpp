@@ -73,7 +73,7 @@ void Turn::Execute() {
 bool Turn::IsFinished() {
 	double angle = RobotMap::ahrs->GetYaw()-initialAngle;
 	double difference=abs(abs(m_angle)-abs(angle));
-	if(difference<=2)
+	if(difference<=1)
 	   return true;
 	   else
 		   return false;

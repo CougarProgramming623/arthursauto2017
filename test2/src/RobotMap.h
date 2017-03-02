@@ -56,6 +56,7 @@ public:
 
 	static CANTalon *cantalonClimb;
 
+	static double angleFromCamera;
 
 	static void init();
 };
