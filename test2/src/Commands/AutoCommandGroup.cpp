@@ -51,7 +51,7 @@ AutoCommandGroup::AutoCommandGroup(int option1) : CommandGroup() {
 				AddSequential(new Turn(59.9f));
 				AddSequential(new WaitTime(0.5));
 
-				AddSequential(new Turn(RobotMap::angleFromCamera));
+				//AddSequential(new Turn(RobotMap::angleFromCamera));
 
 				AddSequential(new DistanceDriveCommand2(15.18,  0.6,  BIG_TIME_OUT));
 				AddSequential(new WaitTime(0.5));
@@ -85,7 +85,7 @@ AutoCommandGroup::AutoCommandGroup(int option1) : CommandGroup() {
 			AddSequential(new DistanceDriveCommand2(100.6, 0.5, BIG_TIME_OUT));
 			AddSequential(new Turn(-59.9f));
 
-			AddSequential(new Turn(RobotMap::angleFromCamera));
+			//AddSequential(new Turn(RobotMap::angleFromCamera));
 
 			AddSequential(new DistanceDriveCommand2(15.18,  0.6, BIG_TIME_OUT));
 			AddSequential(new WaitTime(0.5));
