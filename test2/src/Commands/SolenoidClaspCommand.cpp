@@ -8,7 +8,7 @@
 #include "Commands/Subsystem.h"
 #include "../Robot.h"
 #include "SolenoidClaspCommand.h"
-#include "RobotMap.h"
+#include "../RobotMap.h"
 
 SolenoidClaspCommand::SolenoidClaspCommand(int solenoidCommand, int solenoidReference): Command(){
   //Requires(RobotMap::ClaspSolenoid->Get());

@@ -8,7 +8,7 @@
 
 #include "Climb.h"
 #include "ahrs.h"
-#include "RobotMap.h"
+#include "../RobotMap.h"
 
 
 Climb::Climb(double speed): Command() {
