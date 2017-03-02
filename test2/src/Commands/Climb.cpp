@@ -35,6 +35,7 @@ bool Climb::IsFinished() {
 
 // Called once after isFinished returns true
 void Climb::End() {
+	DriverStation::ReportError("Climb end");
 	RobotMap::cantalonClimb->Set(0);
 }
 
