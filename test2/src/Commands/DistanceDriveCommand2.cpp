@@ -50,7 +50,7 @@ void DistanceDriveCommand2::Initialize() {
 	            /* Alternatively:  I2C::Port::kMXP, SerialPort::Port::kMXP or SerialPort::Port::kUSB */
 	            /* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details.   */
 
-	            RobotMap::RobotMap::ahrs->ZeroYaw();
+	            RobotMap::ahrs->ZeroYaw();
 
 	        } catch (std::exception ex ) {
 	            std::string err_string = "Error instantiating navX-MXP:  ";
