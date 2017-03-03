@@ -40,6 +40,7 @@ DigitalInput *RobotMap::digitalInput1;
 DigitalInput *RobotMap::digitalInput2;
 
 CANTalon *RobotMap::cantalonClimb;
+CANTalon *RobotMap::cantalonClimbSlave;
 
 double RobotMap::angleFromCamera;
 
@@ -137,6 +138,9 @@ void RobotMap::init() {
     digitalInput2=new DigitalInput(2);
 
     cantalonClimb=new CANTalon(3);
+    cantalonClimbSlave = new CANTalon(4);
+    cantalonClimb->SetControlMode(CANTalon::kFollower);
+    cantalonClimb->Set(4);
 
     angleFromCamera=0;
 

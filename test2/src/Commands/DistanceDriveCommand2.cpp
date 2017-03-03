@@ -23,7 +23,9 @@
 	const static double kToleranceDegrees = 2.0f;
 
 	//const static double FEET_PER_REV = 0.472;
-	const static double INCH_PER_TICK = 0.00541847;
+	const static double INCH_PER_TICK = 0.00541847;//use this one for correct gear
+	//const static double INCH_PER_TICK = 0.00602148;
+
 
 
 	int counter=0;

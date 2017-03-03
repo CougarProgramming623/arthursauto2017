@@ -55,6 +55,7 @@ public:
 	static Joystick *buttonBoard;
 
 	static CANTalon *cantalonClimb;
+	static CANTalon *cantalonClimbSlave;
 
 	static double angleFromCamera;
 
