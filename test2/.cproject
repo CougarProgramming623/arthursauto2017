@@ -4,8 +4,7 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.cross.exe.debug.1104744751">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.cross.exe.debug.1104744751" moduleId="org.eclipse.cdt.core.settings" name="Debug">
 				<macros>
-					<stringMacro name="WPILIB" type="VALUE_TEXT" value="C:\Users\Liao_Family/wpilib"/>
-					<stringMacro name="CANTALON" type="VALUE_TEXT" value="c:\users\liao_family\cantalon"/>
+					<stringMacro name="WPILIB" type="VALUE_TEXT" value="C:\Users\admin\wpilib"/>
 				</macros>
 				<externalSettings>
 					<externalSetting>
@@ -51,6 +50,7 @@
 							<tool id="cdt.managedbuild.tool.gnu.cross.cpp.linker.1895838080" name="Cross G++ Linker" superClass="cdt.managedbuild.tool.gnu.cross.cpp.linker">
 								<option id="gnu.cpp.link.option.libs.1363675797" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="navx_frc_cpp"/>
+									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="CTRLib"/>
 									<listOptionValue builtIn="false" value="wpi"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.1566479969" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
