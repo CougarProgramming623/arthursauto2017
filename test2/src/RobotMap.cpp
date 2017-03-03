@@ -139,8 +139,8 @@ void RobotMap::init() {
 
     cantalonClimb=new CANTalon(3);
     cantalonClimbSlave = new CANTalon(4);
-    cantalonClimb->SetControlMode(CANTalon::kFollower);
-    cantalonClimb->Set(4);
+    cantalonClimbSlave->SetControlMode(CANTalon::kFollower);
+    cantalonClimbSlave->Set(3);
 
     angleFromCamera=0;
 
