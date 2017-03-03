@@ -4,7 +4,7 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.cross.exe.debug.1104744751">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.cross.exe.debug.1104744751" moduleId="org.eclipse.cdt.core.settings" name="Debug">
 				<macros>
-					<stringMacro name="WPILIB" type="VALUE_TEXT" value="C:\Users\admin\wpilib"/>
+					<stringMacro name="WPILIB" type="VALUE_TEXT" value="${HOMEDRIVE}${HOMEPATH}\wpilib"/>
 				</macros>
 				<externalSettings>
 					<externalSetting>
@@ -247,6 +247,7 @@
 		<configuration configurationName="Simulate">
 			<resource resourceType="PROJECT" workspacePath="/GearsBotCPP"/>
 		</configuration>
+		<configuration configurationName="linux_simulate"/>
 		<configuration configurationName="Debug">
 			<resource resourceType="PROJECT" workspacePath="/GearsBotCPP"/>
 		</configuration>
