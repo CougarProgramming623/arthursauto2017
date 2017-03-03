@@ -35,7 +35,7 @@ bool Climb::IsFinished() {
 
 // Called once after isFinished returns true
 void Climb::End() {
-	//DriverStation::ReportError("Climb end"+ std::to_string(m_speed));
+	DriverStation::ReportError("Climb end"+ std::to_string(m_speed));
 	RobotMap::cantalonClimb->Set(0);
 }
 
