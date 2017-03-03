@@ -138,7 +138,9 @@ void RobotMap::init() {
     digitalInput2=new DigitalInput(2);
 
     cantalonClimb=new CANTalon(3);
+    cantalonClimb->ConfigNeutralMode(CANSpeedController::NeutralMode::kNeutralMode_Coast);
     cantalonClimbSlave = new CANTalon(4);
+    cantalonClimbSlave->ConfigNeutralMode(CANSpeedController::NeutralMode::kNeutralMode_Coast);
     cantalonClimbSlave->SetControlMode(CANTalon::kFollower);
     cantalonClimbSlave->Set(3);
 

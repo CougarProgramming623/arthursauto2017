@@ -28,7 +28,7 @@ ButtonBoard::ButtonBoard(int port):Joystick(port){
 	fastSpeed->WhenPressed(new SolenoidClaspCommand(0, 2));
 	slowSpeed->WhenPressed(new SolenoidClaspCommand(1, 2));
 
-	climbRope->WhileHeld(new Climb(0.50));
+	climbRope->WhileHeld(new Climb(1));
 	//climbRope->WhenReleased(new Climb(0.0));
 
 }

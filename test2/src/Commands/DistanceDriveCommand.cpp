@@ -79,7 +79,7 @@ void DistanceDriveCommand::Execute() {
 
 	DriverStation::ReportError("execution in distanceDrive");
 
-	DriverStation::ReportError("yawn is:" +std::to_string( RobotMap::ahrs->GetYaw()));
+	DriverStation::ReportError("yaw is:" +std::to_string( RobotMap::ahrs->GetYaw()));
 
 	  deltaT = m_resetTimer->Get();
 	  m_resetTimer->Reset();
