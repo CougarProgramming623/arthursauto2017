@@ -46,22 +46,22 @@ AutoCommandGroup::AutoCommandGroup(int option1) : CommandGroup() {
 				AddSequential(new WaitTime(0.5));
 				AddSequential(new SolenoidClaspCommand(0, 1));
 				AddSequential(new WaitTime(0.5));
-				AddSequential(new DistanceDriveCommand2(100.6 , 0.5, BIG_TIME_OUT));
+				AddSequential(new DistanceDriveCommand2(76.75 , 0.5, BIG_TIME_OUT));
 				AddSequential(new WaitTime(0.5));
 				AddSequential(new Turn(59.9f));
 				AddSequential(new WaitTime(0.5));
 
 				//AddSequential(new Turn(RobotMap::angleFromCamera));
 
-				AddSequential(new DistanceDriveCommand2(15.18,  0.6,  BIG_TIME_OUT));
+				AddSequential(new DistanceDriveCommand2(148.67,  0.6,  BIG_TIME_OUT));
 				AddSequential(new WaitTime(0.5));
 				AddSequential(new SolenoidClaspCommand(1, 0));
 				AddSequential(new WaitTime(0.5));
-				AddSequential(new DistanceDriveCommand2(-15.18,  0.5,  BIG_TIME_OUT));
+				AddSequential(new DistanceDriveCommand2(-170.17,  0.5,  BIG_TIME_OUT));
 				AddSequential(new WaitTime(0.5));
 				AddSequential(new Turn(-59.9f));
 				AddSequential(new WaitTime(0.5));
-				AddSequential(new DistanceDriveCommand2(16,  0.5, BIG_TIME_OUT));
+				AddSequential(new DistanceDriveCommand2(200,  0.5, BIG_TIME_OUT));
 
 		}
 		else if(option==1)
@@ -70,7 +70,7 @@ AutoCommandGroup::AutoCommandGroup(int option1) : CommandGroup() {
 			AddSequential(new WaitTime(0.5));
 			AddSequential(new SolenoidClaspCommand(0, 1));
 			AddSequential(new WaitTime(0.5));
-			AddSequential(new DistanceDriveCommand2(100.6+8,  0.5, BIG_TIME_OUT));
+			AddSequential(new DistanceDriveCommand2(72.52,  0.5, BIG_TIME_OUT));
 			AddSequential(new WaitTime(0.5));
 			AddSequential(new SolenoidClaspCommand(1, 0));
 			AddSequential(new DistanceDriveCommand2(-20,  0.5, BIG_TIME_OUT));
@@ -91,9 +91,9 @@ AutoCommandGroup::AutoCommandGroup(int option1) : CommandGroup() {
 			AddSequential(new WaitTime(0.5));
 			AddSequential(new SolenoidClaspCommand(1, 0));
 			AddSequential(new WaitTime(0.5));
-			AddSequential(new DistanceDriveCommand2(-15.18, 0.5, BIG_TIME_OUT));
+			AddSequential(new DistanceDriveCommand2(-170.17, 0.5, BIG_TIME_OUT));
 			AddSequential(new Turn(59.9f));
-			AddSequential(new DistanceDriveCommand2(16, 0.5, BIG_TIME_OUT));
+			AddSequential(new DistanceDriveCommand2(200, 0.5, BIG_TIME_OUT));
 		}
 
 }
