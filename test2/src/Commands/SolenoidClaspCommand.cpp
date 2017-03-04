@@ -17,27 +17,38 @@ SolenoidClaspCommand::SolenoidClaspCommand(int solenoidCommand, int solenoidRefe
 	solenoid = solenoidReference;//0 for clasp solenoid
 								 //1 for arm solenoid
 							     //2 for speed solenoid
+
+	if(solenoid == 0){//clasp solenoid
+		//Requires(RobotMap::ClaspSolenoid);
+	}
+	else if(solenoid == 1){//arm solenoid
+
+		}
+		else if(solenoid == 2){//clasp solenoid
+
+			}
+
 }
 
 void SolenoidClaspCommand::Initialize(){
 
 }
 void SolenoidClaspCommand::Execute(){
-	if(solenoid == 0){//clasp solenoid
+	if(solenoid == OPENCLOSE_SOLENOID){//clasp solenoid
 		if(command == 0){
-			RobotMap::ClaspSolenoid->Set(true);
-			RobotMap::buttonBoard->SetOutput(10, true);
-			RobotMap::buttonBoard->SetOutput(11, false);
+			RobotMap::ClaspSolenoid->Set(false);
+			RobotMap::buttonBoard->SetOutput(5, true);
+			RobotMap::buttonBoard->SetOutput(9, false);
 		}
 
 		else if(command == 1){
-			RobotMap::ClaspSolenoid->Set(false);
-			RobotMap::buttonBoard->SetOutput(11, true);
-			RobotMap::buttonBoard->SetOutput(10, false);
+			RobotMap::ClaspSolenoid->Set(true);
+			RobotMap::buttonBoard->SetOutput(9, true);
+			RobotMap::buttonBoard->SetOutput(5, false);
 		}
 
 	}
-	else if(solenoid == 1){//arm solenoid
+	else if(solenoid == UPDOWN_SOLENOID){//arm solenoid
 		if(command == 0){
 			RobotMap::buttonBoard->SetOutput(3, true);
 			RobotMap::buttonBoard->SetOutput(4, false);
@@ -51,22 +62,22 @@ void SolenoidClaspCommand::Execute(){
 		}
 
 	}
-	else if(solenoid == 2){//speed solenoid
+	else if(solenoid == SPEED_SOLENOID){//speed solenoid
 		if(command == 0){
-			RobotMap::buttonBoard->SetOutput(5, true);
-			RobotMap::buttonBoard->SetOutput(9, false);
+			RobotMap::buttonBoard->SetOutput(10, true);
+			RobotMap::buttonBoard->SetOutput(11, false);
 			RobotMap::SpeedSolenoid->Set(true);
 		}
 
 		else if(command == 1){
-			RobotMap::buttonBoard->SetOutput(9, true);
-			RobotMap::buttonBoard->SetOutput(5, false);
+			RobotMap::buttonBoard->SetOutput(11, true);
+			RobotMap::buttonBoard->SetOutput(10, false);
 			RobotMap::SpeedSolenoid->Set(false);
 		}
 
 	}
 
-	//DriverStation::ReportError(" Solenoid:" +std::to_string(solenoid) + "command "+std::to_string(command));
+	DriverStation::ReportError(" Solenoid: " +std::to_string(solenoid) + "command "+std::to_string(command));
 
 
 }

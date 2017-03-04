@@ -19,14 +19,14 @@ ButtonBoard::ButtonBoard(int port):Joystick(port){
 	climbRope = new JoystickButton(this, PORT_CLIMB_ROPE);
 	//robotUp = new JoystickButton(this, PORT_ROBOT_UP);
 
-	gearClose->WhenPressed(new SolenoidClaspCommand(0, 0));
-	gearOpen->WhenPressed(new SolenoidClaspCommand(1, 0));
+	gearClose->WhenPressed(new SolenoidClaspCommand(0, SPEED_SOLENOID));
+	gearOpen->WhenPressed(new SolenoidClaspCommand(1, SPEED_SOLENOID));
 
-	armUp->WhenPressed(new SolenoidClaspCommand(0, 1));
-	armDown->WhenPressed(new SolenoidClaspCommand(1, 1));
+	armUp->WhenPressed(new SolenoidClaspCommand(0, UPDOWN_SOLENOID));
+	armDown->WhenPressed(new SolenoidClaspCommand(1, UPDOWN_SOLENOID));
 
-	fastSpeed->WhenPressed(new SolenoidClaspCommand(0, 2));
-	slowSpeed->WhenPressed(new SolenoidClaspCommand(1, 2));
+	fastSpeed->WhenPressed(new SolenoidClaspCommand(0, OPENCLOSE_SOLENOID));
+	slowSpeed->WhenPressed(new SolenoidClaspCommand(1, OPENCLOSE_SOLENOID));
 
 	climbRope->WhileHeld(new Climb(1));
 	//climbRope->WhenReleased(new Climb(0.0));

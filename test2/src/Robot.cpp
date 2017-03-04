@@ -31,7 +31,7 @@ void Robot::RobotInit() {
 	//networkTable = NetworkTable::GetTable("GRIP/myContoursReport");
 
 
-	RobotMap::ClaspSolenoid->Set(false);
+	RobotMap::ClaspSolenoid->Set(true);
 	RobotMap::ArmSolenoid->Set(false);
 	RobotMap::SpeedSolenoid->Set(true);
     subsystemDrive.reset(new SubsystemDrive());

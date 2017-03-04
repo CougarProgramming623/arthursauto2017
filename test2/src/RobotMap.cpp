@@ -121,9 +121,9 @@ void RobotMap::init() {
                 LiveWindow::GetInstance()->AddSensor("IMU", "Gyro", ahrs);
             }
 
-    ClaspSolenoid = new Solenoid(0,0);  //default set all solenoids to false
-    ArmSolenoid = new Solenoid(0, 1);
-    SpeedSolenoid = new Solenoid(0, 2);
+    ClaspSolenoid = new Solenoid(0, OPENCLOSE_SOLENOID);  //default set all solenoids to false
+    ArmSolenoid = new Solenoid(0, UPDOWN_SOLENOID);
+    SpeedSolenoid = new Solenoid(0, SPEED_SOLENOID);
 
     buttonBoard = new ButtonBoard(1);
     buttonBoard->SetOutput(3, false);
