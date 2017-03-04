@@ -4,7 +4,7 @@
 
 class WaitTime: public Command {
 public:
-	WaitTime(int);
+	WaitTime(double);
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();
@@ -12,7 +12,7 @@ public:
 	virtual ~WaitTime();
 	Timer *timer;
 private:
-	int m_time;
+	double m_time;
 	double initialTime;
 };
 

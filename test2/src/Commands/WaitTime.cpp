@@ -8,7 +8,7 @@
 #include "WaitTime.h"
 #include "WPILib.h"
 
-WaitTime::WaitTime(int time): Command() {
+WaitTime::WaitTime(double time): Command() {
 	m_time = time;
 }
 
