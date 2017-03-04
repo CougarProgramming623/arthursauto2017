@@ -28,7 +28,7 @@ void Climb::Initialize() {
 void Climb::Execute() {
 	RobotMap::cantalonClimb->Set(m_speed);
 	//DriverStation::ReportError("Climb execute" + std::to_string(m_speed));
-	double current = RobotMap::cantalonClimb->GetOutputCurrent();
+	//double current = RobotMap::cantalonClimb->GetOutputCurrent();
 	//DriverStation::ReportError("Output current of motor: " + std::to_string(current));
 }
 

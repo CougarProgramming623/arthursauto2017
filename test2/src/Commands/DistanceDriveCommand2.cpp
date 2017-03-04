@@ -56,8 +56,9 @@ void DistanceDriveCommand2::Initialize() {
 	        } catch (std::exception ex ) {
 	            std::string err_string = "Error instantiating navX-MXP:  ";
 	            err_string += ex.what();
-	            DriverStation::ReportError(err_string.c_str());
+	            //DriverStation::ReportError(err_string.c_str());
 	        }
+	        DriverStation::ReportError("DistanceDrive2::Intialize() done.");
 
 	        m_resetTimer =new Timer();
 	        m_resetTimer->Start();

@@ -89,15 +89,15 @@ void Robot::DisabledPeriodic() {
 void Robot::AutonomousInit() {
 
 	if (autonomousCommand.get() != nullptr) {
-		//autonomousCommand->Start();
+		autonomousCommand->Start();
 	}
 }
 
 void Robot::AutonomousPeriodic() {
-	return;
+	//return;
 	Scheduler::GetInstance()->Run();
 
-
+#if 0
 	std::vector<double> tempArray = networkTable->GetNumberArray("width", llvm::ArrayRef<double>());
 	std::vector<double> tempArray2 = networkTable->GetNumberArray("centerX", llvm::ArrayRef<double>());
 
@@ -119,6 +119,7 @@ void Robot::AutonomousPeriodic() {
 	//DriverStation::ReportError("digital input 0 is:" +std::to_string( RobotMap::digitalInput0->Get()));
 	//DriverStation::ReportError("digital input 1 is:" +std::to_string( RobotMap::digitalInput1->Get()));
 	//DriverStation::ReportError("digital input 2 is:" +std::to_string( RobotMap::digitalInput2->Get()));
+#endif
 }
 
 void Robot::TeleopInit() {

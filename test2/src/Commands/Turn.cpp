@@ -14,7 +14,13 @@ const static double kF = 0.00f;
 const static double kToleranceDegrees = 2.0f;
 
 Turn::Turn(double setpoint): Command() {
-    m_angle=setpoint;
+	const double slop = 5;
+    //m_angle=setpoint;
+	if (setpoint > 0) {
+		m_angle = setpoint + slop;
+	} else {
+		m_angle = setpoint - slop;
+	}
     Requires(Robot::subsystemDrive.get());
 }
 
@@ -73,10 +79,12 @@ void Turn::Execute() {
 bool Turn::IsFinished() {
 	double angle = RobotMap::ahrs->GetYaw()-initialAngle;
 	double difference=abs(abs(m_angle)-abs(angle));
-	if(difference<=1)
+	// see slop in Initialize()
+	if(difference<=5) {
 	   return true;
-	   else
-		   return false;
+	} else {
+		return false;
+	}
 	/*
   if(angle >= m_angle && m_angle > 0){
     return true;

@@ -102,7 +102,7 @@ void DistanceDriveCommand::Execute() {
 		  lastAccelEst[i]=accelGyro[i];
 	  }
 
-	  double angle = RobotMap::ahrs->GetYaw();
+	  //double angle = RobotMap::ahrs->GetYaw();
 	  //Robot::subsystemDrive->ArcadeDrive(1,  -angle * kP, true);
 	  if(m_distance<0)
 	    Robot::subsystemDrive->ArcadeDrive(-0.75, rotateToAngleRate, true);
