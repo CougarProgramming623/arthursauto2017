@@ -22,9 +22,8 @@
 
 	const static double kToleranceDegrees = 2.0f;
 
-	//const static double FEET_PER_REV = 0.472;
 	const static double INCH_PER_TICK = 0.00541847;//use this one for correct gear
-	//const static double INCH_PER_TICK = 0.00602148;
+
 
 
 
@@ -45,7 +44,7 @@ DistanceDriveCommand2::DistanceDriveCommand2(double distance, double speed, int 
 void DistanceDriveCommand2::Initialize() {
 
 	try {
-		SetTimeout(m_timeout);
+		SetTimeout(m_timeout); //timeout for 10ms
 
 		DriverStation::ReportError("DistanceDriveCommand init");
 	            /* Communicate w/navX-MXP via the MXP SPI Bus.                                       */
@@ -100,9 +99,8 @@ int DistanceDriveCommand2::getPosition()
 // Called repeatedly when this Command is scheduled to run
 void DistanceDriveCommand2::Execute() {
 
-	DriverStation::ReportError(" distanceDrive yawn is:" +std::to_string( RobotMap::ahrs->GetYaw()));
-	DriverStation::ReportError(" encoderposition:" +std::to_string(getPosition())+ " "+std::to_string(initEncPosition)+" "+std::to_string(m_distance));
-	//DriverStation::ReportError(" rev is:" +std::to_string((getPosition()-initEncPosition)/(1440*4.0)));
+	//DriverStation::ReportError("distanceDrive yaw is:" +std::to_string( RobotMap::ahrs->GetYaw()));
+	//DriverStation::ReportError(" encoderposition:" +std::to_string(getPosition())+ " "+std::to_string(initEncPosition)+" "+std::to_string(m_distance));
 
 
 	//  double angle = RobotMap::ahrs->GetYaw();
@@ -137,11 +135,11 @@ bool DistanceDriveCommand2::IsFinished() {
 
 // Called once after isFinished returns true
 void DistanceDriveCommand2::End() {
-	DriverStation::ReportError("DistanceDriveCommand end initial:"+initEncPosition);
+	//DriverStation::ReportError("DistanceDriveCommand end initial:"+initEncPosition);
 
 
 	initEncPosition=getPosition();
-	DriverStation::ReportError("DistanceDriveCommand end:"+initEncPosition);
+	//DriverStation::ReportError("DistanceDriveCommand end:"+initEncPosition);
 
 	//m_distance=0;
 

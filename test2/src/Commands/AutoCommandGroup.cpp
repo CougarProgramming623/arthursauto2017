@@ -32,9 +32,9 @@ AutoCommandGroup::AutoCommandGroup(int option1) : CommandGroup() {
 	}
 
 	if(option==-1){
-		AddSequential(new DistanceDriveCommand2(60.0, 0.5, BIG_TIME_OUT));
-		AddSequential(new Turn(59.9f));
-		AddSequential(new DistanceDriveCommand2(24.0, 0.5,  BIG_TIME_OUT));
+	//	AddSequential(new DistanceDriveCommand2(60.0, 0.5, BIG_TIME_OUT));
+	//	AddSequential(new Turn(59.9f));
+	//	AddSequential(new DistanceDriveCommand2(24.0, 0.5,  BIG_TIME_OUT));
 		return;
 
 	}
@@ -42,9 +42,9 @@ AutoCommandGroup::AutoCommandGroup(int option1) : CommandGroup() {
 		//REAL SCENORY
 		if(option==0) //in the field left sided, and try to turn right
 		{
-			    AddSequential(new SolenoidClaspCommand(0, 0));
+			    AddSequential(new SolenoidClaspCommand(0, 0)); //clasp gear
 				AddSequential(new WaitTime(0.5));
-				AddSequential(new SolenoidClaspCommand(0, 1));
+				AddSequential(new SolenoidClaspCommand(0, 1)); //lift gear
 				AddSequential(new WaitTime(0.5));
 				AddSequential(new DistanceDriveCommand2(76.75 , 0.5, BIG_TIME_OUT));
 				AddSequential(new WaitTime(0.5));
@@ -55,13 +55,13 @@ AutoCommandGroup::AutoCommandGroup(int option1) : CommandGroup() {
 
 				AddSequential(new DistanceDriveCommand2(48.67+12,  0.6,  BIG_TIME_OUT));
 				AddSequential(new WaitTime(0.5));
-				AddSequential(new SolenoidClaspCommand(1, 0));
+				AddSequential(new SolenoidClaspCommand(1, 0)); //let go of gear
 				AddSequential(new WaitTime(0.5));
-				AddSequential(new DistanceDriveCommand2(-70.17,  0.5,  BIG_TIME_OUT));
+				AddSequential(new DistanceDriveCommand2(-48.67-12,  0.4,  BIG_TIME_OUT));
 				AddSequential(new WaitTime(0.5));
 				AddSequential(new Turn(-59.9f));
 				AddSequential(new WaitTime(0.5));
-				AddSequential(new DistanceDriveCommand2(200,  0.5, BIG_TIME_OUT));
+				AddSequential(new DistanceDriveCommand2(110, 1.0, BIG_TIME_OUT));
 
 		}
 		else if(option==1)
@@ -70,7 +70,7 @@ AutoCommandGroup::AutoCommandGroup(int option1) : CommandGroup() {
 			AddSequential(new WaitTime(0.5));
 			AddSequential(new SolenoidClaspCommand(0, 1));
 			AddSequential(new WaitTime(0.5));
-			AddSequential(new DistanceDriveCommand2(72.52+6,  0.5, BIG_TIME_OUT));
+			AddSequential(new DistanceDriveCommand2(66+6,  0.5, BIG_TIME_OUT));
 			AddSequential(new WaitTime(0.5));
 			AddSequential(new SolenoidClaspCommand(1, 0));
 			AddSequential(new DistanceDriveCommand2(-20,  0.5, BIG_TIME_OUT));
@@ -91,9 +91,9 @@ AutoCommandGroup::AutoCommandGroup(int option1) : CommandGroup() {
 			AddSequential(new WaitTime(0.5));
 			AddSequential(new SolenoidClaspCommand(1, 0));
 			AddSequential(new WaitTime(0.5));
-			AddSequential(new DistanceDriveCommand2(-70.17, 0.5, BIG_TIME_OUT));
+			AddSequential(new DistanceDriveCommand2(-48.67-12, 0.4, BIG_TIME_OUT));
 			AddSequential(new Turn(59.9f));
-			AddSequential(new DistanceDriveCommand2(200, 0.5, BIG_TIME_OUT));
+			AddSequential(new DistanceDriveCommand2(110, 0.5, BIG_TIME_OUT));
 		}
 
 }

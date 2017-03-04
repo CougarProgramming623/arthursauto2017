@@ -28,13 +28,13 @@ void Turn::Initialize() {
 //    RobotMap::ahrs->ZeroYaw();
     initialAngle = RobotMap::ahrs->GetYaw();
 
-    DriverStation::ReportError("First time:"+std::to_string(initialAngle)+" "+std::to_string(m_angle));
+    //DriverStation::ReportError("First time:"+std::to_string(initialAngle)+" "+std::to_string(m_angle));
 
 
     } catch (std::exception ex ) {
     std::string err_string = "Error instantiating navX-MXP:  ";
     err_string += ex.what();
-    DriverStation::ReportError(err_string.c_str());
+    //DriverStation::ReportError(err_string.c_str());
   }
 
   turnController = new PIDController(kP, kI, kD, kF, RobotMap::ahrs, this);
@@ -53,7 +53,7 @@ void Turn::Initialize() {
 void Turn::Execute() {
     //ahrs->ZeroYaw();
 	double finishAngle = RobotMap::ahrs->GetYaw();
-	DriverStation::ReportError("running:"+ std::to_string(finishAngle));
+	//DriverStation::ReportError("running:"+ std::to_string(finishAngle));
 
 	double currentRotationRate = 0.3;
 	/*if (abs(finishAngle - m_angle) <= 10) {

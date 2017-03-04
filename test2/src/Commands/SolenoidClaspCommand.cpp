@@ -66,7 +66,7 @@ void SolenoidClaspCommand::Execute(){
 
 	}
 
-	DriverStation::ReportError(" Solenoid:" +std::to_string(solenoid) + "command "+std::to_string(command));
+	//DriverStation::ReportError(" Solenoid:" +std::to_string(solenoid) + "command "+std::to_string(command));
 
 
 }
