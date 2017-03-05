@@ -90,10 +90,9 @@ AutoCommandGroup::AutoCommandGroup(int option1) :
 		AddSequential(new SolenoidClaspCommand(0, UPDOWN_SOLENOID));
 		AddSequential(new WaitTime(.5));
 		AddSequential(new DistanceDriveCommand2(76.75 - 2 - 6, 0.5, BIG_TIME_OUT));
-		AddSequential(new SolenoidClaspCommand(1, SPEED_SOLENOID));		AddSequential(new Turn(-59.9f));
-
+		AddSequential(new SolenoidClaspCommand(1, SPEED_SOLENOID));
+		AddSequential(new Turn(-59.9f));
 		//AddSequential(new Turn(RobotMap::angleFromCamera));
-
 		AddSequential(new DistanceDriveCommand2(48.67+5, 0.6, BIG_TIME_OUT));
 		AddSequential(new WaitTime(.5));
 		AddSequential(new SolenoidClaspCommand(1, OPENCLOSE_SOLENOID));
