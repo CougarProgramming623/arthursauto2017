@@ -36,6 +36,7 @@ AutoCommandGroup::AutoCommandGroup(int option1) :
 	//REAL SCENORY
 	if (option == 0) //in the field left sided, and try to turn right
 			{
+		AddSequential(new SolenoidClaspCommand(0, SPEED_SOLENOID));
 		AddSequential(new SolenoidClaspCommand(1, OPENCLOSE_SOLENOID)); //open gear
 		AddSequential(new WaitTime(.5));
 		AddSequential(new DistanceDriveCommand2(2, 0.4, BIG_TIME_OUT));
@@ -44,14 +45,15 @@ AutoCommandGroup::AutoCommandGroup(int option1) :
 		AddSequential(new WaitTime(.5));
 		AddSequential(new SolenoidClaspCommand(0, UPDOWN_SOLENOID)); //lift gear
 		AddSequential(new WaitTime(.5));
-		AddSequential(new DistanceDriveCommand2(76.75 - 2, 0.5, BIG_TIME_OUT));
+		AddSequential(new DistanceDriveCommand2(76.75 - 2 - 6, 0.5, BIG_TIME_OUT));
 		AddSequential(new WaitTime(.5));
+		AddSequential(new SolenoidClaspCommand(1, SPEED_SOLENOID));
 		AddSequential(new Turn(59.9f));
 		AddSequential(new WaitTime(.5));
 
 		//AddSequential(new Turn(RobotMap::angleFromCamera));
 
-		AddSequential(new DistanceDriveCommand2(48.67 + 12, 0.6, BIG_TIME_OUT));
+		AddSequential(new DistanceDriveCommand2(48.67 + 5, 0.6, BIG_TIME_OUT));
 		AddSequential(new WaitTime(.5));
 		AddSequential(new SolenoidClaspCommand(1, OPENCLOSE_SOLENOID)); //let go of gear
 		AddSequential(new WaitTime(.5));
@@ -71,13 +73,14 @@ AutoCommandGroup::AutoCommandGroup(int option1) :
 		AddSequential(new WaitTime(.5)); //wait
 		AddSequential(new SolenoidClaspCommand(0, UPDOWN_SOLENOID)); //up
 		AddSequential(new WaitTime(.5)); //wait
-		AddSequential(new DistanceDriveCommand2(66 + 6, 0.5, BIG_TIME_OUT)); //go to peg
+		AddSequential(new DistanceDriveCommand2(66 + 3, 0.5, BIG_TIME_OUT)); //go to peg
 		AddSequential(new WaitTime(.5)); //wait
 		AddSequential(new SolenoidClaspCommand(1, OPENCLOSE_SOLENOID));//open
 		AddSequential(new WaitTime(1.0));
 		AddSequential(new DistanceDriveCommand2(-40, 0.5, BIG_TIME_OUT)); //drive back
 
 	} else if (option == 2) {
+		AddSequential(new SolenoidClaspCommand(0, SPEED_SOLENOID));
 		AddSequential(new SolenoidClaspCommand(1, OPENCLOSE_SOLENOID)); //open gear
 		AddSequential(new WaitTime(.5));
 		AddSequential(new DistanceDriveCommand2(2, 0.4, BIG_TIME_OUT));
@@ -86,12 +89,12 @@ AutoCommandGroup::AutoCommandGroup(int option1) :
 		AddSequential(new WaitTime(.5));
 		AddSequential(new SolenoidClaspCommand(0, UPDOWN_SOLENOID));
 		AddSequential(new WaitTime(.5));
-		AddSequential(new DistanceDriveCommand2(76.75, 0.5, BIG_TIME_OUT));
-		AddSequential(new Turn(-59.9f));
+		AddSequential(new DistanceDriveCommand2(76.75 - 2 - 6, 0.5, BIG_TIME_OUT));
+		AddSequential(new SolenoidClaspCommand(1, SPEED_SOLENOID));		AddSequential(new Turn(-59.9f));
 
 		//AddSequential(new Turn(RobotMap::angleFromCamera));
 
-		AddSequential(new DistanceDriveCommand2(48.67 + 12, 0.6, BIG_TIME_OUT));
+		AddSequential(new DistanceDriveCommand2(48.67+5, 0.6, BIG_TIME_OUT));
 		AddSequential(new WaitTime(.5));
 		AddSequential(new SolenoidClaspCommand(1, OPENCLOSE_SOLENOID));
 		AddSequential(new WaitTime(.5));
