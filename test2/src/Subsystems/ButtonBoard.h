@@ -12,6 +12,7 @@
 #define PORT_SLOW_SPEED 4
 #define PORT_CLIMB_ROPE 7
 #define PORT_ROBOT_UP 8//not sure if this will be implemented yet
+#define PORT_GEAR_PUSH 9
 
 class ButtonBoard: public Joystick{
 private:
@@ -22,6 +23,7 @@ private:
 	JoystickButton *fastSpeed;
 	JoystickButton *slowSpeed;
 	JoystickButton *climbRope;
+	JoystickButton *gearPush;
 	//JoystickButton *robotUp;
 
 public:

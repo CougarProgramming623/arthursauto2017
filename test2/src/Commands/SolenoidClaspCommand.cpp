@@ -17,6 +17,7 @@ SolenoidClaspCommand::SolenoidClaspCommand(int solenoidCommand, int solenoidRefe
 	solenoid = solenoidReference;//0 for clasp solenoid
 								 //1 for arm solenoid
 							     //2 for speed solenoid
+								//3 for gear pusher solenoid
 
 	if(solenoid == 0){//clasp solenoid
 		//Requires(RobotMap::ClaspSolenoid);
@@ -75,6 +76,14 @@ void SolenoidClaspCommand::Execute(){
 			RobotMap::SpeedSolenoid->Set(false);
 		}
 
+	}
+	else if(solenoid == GEAR_PUSHER_SOLENOID) {
+		if (command == 0) {
+			RobotMap::GearPusherSolenoid->Set(true);
+		}
+		else if(command == 1) {
+			RobotMap::GearPusherSolenoid->Set(false);
+		}
 	}
 
 	DriverStation::ReportError(" Solenoid: " +std::to_string(solenoid) + "command "+std::to_string(command));

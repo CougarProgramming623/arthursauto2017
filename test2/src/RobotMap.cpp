@@ -29,6 +29,7 @@ AHRS *RobotMap::ahrs;
 Solenoid *RobotMap::ClaspSolenoid;//module 0 channel 0
 Solenoid *RobotMap::ArmSolenoid;//module 0 channel 1Talon
 Solenoid *RobotMap::SpeedSolenoid;
+Solenoid *RobotMap::GearPusherSolenoid;
 Joystick *RobotMap::buttonBoard;
 CANTalon *RobotMap::cantalonLeftFront;
 CANTalon *RobotMap::cantalonLeftBack;
@@ -124,6 +125,7 @@ void RobotMap::init() {
     ClaspSolenoid = new Solenoid(0, OPENCLOSE_SOLENOID);  //default set all solenoids to false
     ArmSolenoid = new Solenoid(0, UPDOWN_SOLENOID);
     SpeedSolenoid = new Solenoid(0, SPEED_SOLENOID);
+    GearPusherSolenoid = new Solenoid(0, GEAR_PUSHER_SOLENOID);
 
     buttonBoard = new ButtonBoard(1);
     buttonBoard->SetOutput(3, false);
