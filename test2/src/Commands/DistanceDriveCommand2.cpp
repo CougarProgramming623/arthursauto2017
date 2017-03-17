@@ -22,7 +22,7 @@
 
 	const static double kToleranceDegrees = 2.0f;
 
-	const static double INCH_PER_TICK = 0.00541847;//use this one for correct gear
+	const static double INCH_PER_TICK = 0.0067;	//0.00541847 //use this one for correct gear
 
 
 
@@ -128,7 +128,7 @@ void DistanceDriveCommand2::Execute() {
 bool DistanceDriveCommand2::IsFinished() {
 	if(IsTimedOut())
 	    return true;
-	if(fabs(getDriveDistance())>fabs(m_distance))
+	if(fabs(getDriveDistance())>=fabs(m_distance))
 		return true;
 
     return false;
