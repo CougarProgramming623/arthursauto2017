@@ -10,7 +10,7 @@
 #include "ahrs.h"
 #include "../RobotMap.h"
 
-const double maxCurrent = 15.0;
+const double maxCurrent = 18.0;
 int spikeCounter = 0;
 int maxSpikeCounter = 0;
 
@@ -20,13 +20,17 @@ Climb::Climb(double speed): Command() {
 
 void Climb::Initialize() {
 	DriverStation::ReportError("Climb initialize" + std::to_string(m_speed));
-
+	hitLimit = false;
 }
 
 
 // Called repeatedly when this Command is scheduled to run
 void Climb::Execute() {
+	if (hitLimit == true) {
+		RobotMap::cantalonClimb->Set(0);
+	} else {
 	RobotMap::cantalonClimb->Set(m_speed);
+	}
 	//DriverStation::ReportError("Climb execute" + std::to_string(m_speed));
 	//double current = RobotMap::cantalonClimb->GetOutputCurrent();
 	//DriverStation::ReportError("Output current of motor: " + std::to_string(current));
@@ -48,7 +52,7 @@ bool Climb::IsFinished() {
 	DriverStation::ReportError("pike Counter: " + std::to_string(spikeCounter));
 	DriverStation::ReportError("maxSpike Counter: " + std::to_string(maxSpikeCounter));
 	if (spikeCounter > 8) {
-		m_speed = 0.0;
+		hitLimit = true;
 		return true;
 	}
 

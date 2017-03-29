@@ -26,6 +26,7 @@ public:
 private:
 
 	double m_speed = 0.0;
+	bool hitLimit = false;
 
 };
 
