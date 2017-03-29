@@ -94,7 +94,7 @@ bool Turn::IsFinished() {
 // Called once after isFinished returns true
 void Turn::End() {
 	Robot::subsystemDrive->ArcadeDrive(0, 0, true);
-
+	DriverStation::ReportError("Turn complete.");
 }
 
 // Called when another command which requires one or more of the same
