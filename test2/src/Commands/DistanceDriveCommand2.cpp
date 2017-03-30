@@ -81,7 +81,7 @@ void DistanceDriveCommand2::Initialize() {
 
 			rotateToAngleRate=0;
 			initEncPosition=getPosition();
-
+			DriverStation::ReportError("Initialize: " + std::to_string(initEncPosition));
 }
 
 double  DistanceDriveCommand2::getDriveDistance()
@@ -140,7 +140,7 @@ void DistanceDriveCommand2::End() {
 
 
 	initEncPosition=getPosition();
-	//DriverStation::ReportError("DistanceDriveCommand end:"+initEncPosition);
+	DriverStation::ReportError("End: " + std::to_string(initEncPosition));
 
 	//m_distance=0;
 
