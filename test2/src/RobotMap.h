@@ -64,6 +64,12 @@ public:
 	static CANTalon *cantalonClimbSlave;
 
 	static double angleFromCamera;
+	static double turnP;
+	static double turnI;
+	static double turnD;
+	static double driveP;
+	static double driveI;
+	static double driveD;
 
 	static void init();
 };
