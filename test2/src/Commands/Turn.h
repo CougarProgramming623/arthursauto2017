@@ -10,7 +10,7 @@ class Turn : public Command, public PIDOutput {
 public:
 
     AHRS *ahrs;                         // navX-MXP
-    PIDController *turnController;      // PID Controller
+    PIDController *turnController;// PID Controller
     double rotateToAngleRate;           // Current rotation rate
     double initialAngle;
   Turn(double);
@@ -19,10 +19,13 @@ public:
   bool IsFinished();
   void End();
   void Interrupted();
-  virtual void PIDWrite(double);
+  virtual void PIDWrite(double output) {
+  	this->rotateToAngleRate = output;
+  }
 
 private:
   double m_angle = 0.0;
+  Timer *turnTimer;
 };
 
 #endif  // Turn_H

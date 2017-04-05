@@ -13,7 +13,7 @@ const static double DRIVE_TO_PEG = 72.25+2+2+2+2+3-15; // measured at 72.25
 const static double DRIVE_TO_MIDDLE = 111.0; // measured at 111.0
 const static double FRONT_HALF_LENGTH = 21.25;
 const static double BACK_HALF_LENGTH = 17.25;
-const static double TURN_DEGREES = 49.0f;
+const static double TURN_DEGREES = 60.0f;
 
 AutoCommandGroup::AutoCommandGroup(int option1) :
 		CommandGroup() {
@@ -32,9 +32,8 @@ AutoCommandGroup::AutoCommandGroup(int option1) :
 	}
 
 	if (option == -1) {
-		//	AddSequential(new DistanceDriveCommand2(60.0, 0.5, BIG_TIME_OUT));
-		//	AddSequential(new Turn(59.9f));
-		//	AddSequential(new DistanceDriveCommand2(24.0, 0.5,  BIG_TIME_OUT));
+		//AddSequential(new DistanceDriveCommand2(48, 1.0, BIG_TIME_OUT));
+		AddSequential(new Turn(90.0f));
 		return;
 
 	}
@@ -42,74 +41,41 @@ AutoCommandGroup::AutoCommandGroup(int option1) :
 	//REAL SCENARIO
 	if (option == 0) //in the field left sided, and try to turn right
 			{
-		AddSequential(new SolenoidClaspCommand(0, SPEED_SOLENOID));
-		// No longer need to open and close to grab gear.  It will start grabbed
-		//AddSequential(new SolenoidClaspCommand(1, OPENCLOSE_SOLENOID)); //open gear
-		//AddSequential(new WaitTime(.5));
-		//AddSequential(new DistanceDriveCommand2(4, 0.4, BIG_TIME_OUT));
-		AddSequential(new SolenoidClaspCommand(0, OPENCLOSE_SOLENOID)); //clasp gear
-		AddSequential(new WaitTime(.5));
-
+		AddSequential(new SolenoidClaspCommand(0, SPEED_SOLENOID)); //high gear
+		AddSequential(new SolenoidClaspCommand(0, OPENCLOSE_SOLENOID)); //clasp gear;
 		AddSequential(new SolenoidClaspCommand(0, UPDOWN_SOLENOID)); //lift gear
-		AddSequential(new WaitTime(.5));
-		AddSequential(
-				new DistanceDriveCommand2(DRIVE_TO_TURN - BACK_HALF_LENGTH,
-						0.5, BIG_TIME_OUT)); //Haven't yet figured out why 0 and 2 are travelling different distances
-		AddSequential(new WaitTime(.5));
+		AddSequential(new DistanceDriveCommand2(DRIVE_TO_TURN - BACK_HALF_LENGTH, 1.0, BIG_TIME_OUT)); //Haven't yet figured out why 0 and 2 are traveling different distances
 		AddSequential(new SolenoidClaspCommand(1, SPEED_SOLENOID));//slow down for turn
 		AddSequential(new Turn(TURN_DEGREES));
-		AddSequential(new WaitTime(.5));
-
 		//AddSequential(new Turn(RobotMap::angleFromCamera));
-
-		AddSequential(
-				new DistanceDriveCommand2(DRIVE_TO_PEG - FRONT_HALF_LENGTH + 4,
-						0.6, BIG_TIME_OUT));
-		AddSequential(new WaitTime(.5));
+		AddSequential(new DistanceDriveCommand2(DRIVE_TO_PEG - FRONT_HALF_LENGTH + 4, 0.75 , BIG_TIME_OUT));
+		//AddSequential(new WaitTime(.5));
 		//AddSequential(new SolenoidClaspCommand(1, OPENCLOSE_SOLENOID)); //let go of gear
-		AddSequential(new WaitTime(.5));
+		//AddSequential(new WaitTime(.5));
 		//AddSequential(new DistanceDriveCommand2(-1 * (DRIVE_TO_PEG - FRONT_HALF_LENGTH), 0.5,BIG_TIME_OUT)); // don't back up too much.  Stay in front of baseline
 
 	} else if (option == 1) {
 		AddSequential(new SolenoidClaspCommand(0, SPEED_SOLENOID));
 		AddSequential(new SolenoidClaspCommand(0, OPENCLOSE_SOLENOID)); //close
-		AddSequential(new WaitTime(.5)); //wait
-
 		AddSequential(new SolenoidClaspCommand(0, UPDOWN_SOLENOID)); //up
-		AddSequential(new WaitTime(.5)); //wait
-		AddSequential(new DistanceDriveCommand2(DRIVE_TO_MIDDLE - FRONT_HALF_LENGTH - BACK_HALF_LENGTH + 7.5, 0.5, BIG_TIME_OUT)); //go to peg
-		AddSequential(new WaitTime(.5)); //wait
+		AddSequential(new DistanceDriveCommand2(DRIVE_TO_MIDDLE - FRONT_HALF_LENGTH - BACK_HALF_LENGTH + 7.5, 1.0, BIG_TIME_OUT)); //go to peg
 		AddSequential(new SolenoidClaspCommand(0, GEAR_PUSHER_SOLENOID)); //push gear
 		AddSequential(new WaitTime(0.5));
 		AddSequential(new SolenoidClaspCommand(1, OPENCLOSE_SOLENOID)); //open
-		AddSequential(new WaitTime(1.0));
-		AddSequential(new DistanceDriveCommand2(-40, 0.5, BIG_TIME_OUT)); //drive back
+		AddSequential(new WaitTime(0.5));
+		AddSequential(new DistanceDriveCommand2(-40, 0.75, BIG_TIME_OUT)); //drive back
 		AddSequential(new SolenoidClaspCommand(1, GEAR_PUSHER_SOLENOID)); //unpush gear
 	} else if (option == 2) {
 		AddSequential(new SolenoidClaspCommand(0, SPEED_SOLENOID)); //high gear
-		// No longer need to open and close to grab gear.  It will start grabbed
-		//AddSequential(new SolenoidClaspCommand(1, OPENCLOSE_SOLENOID)); //open gear
-		//AddSequential(new WaitTime(.5)); //wait
-		//AddSequential(new DistanceDriveCommand2(4, 0.4, BIG_TIME_OUT)); //slight forward
 		AddSequential(new SolenoidClaspCommand(0, OPENCLOSE_SOLENOID)); //close gear
-		AddSequential(new WaitTime(.5)); //wait
-
 		AddSequential(new SolenoidClaspCommand(0, UPDOWN_SOLENOID)); //gear up
-		AddSequential(new WaitTime(.5)); //wait
-		AddSequential(
-				new DistanceDriveCommand2(DRIVE_TO_TURN - BACK_HALF_LENGTH,
-						0.5, BIG_TIME_OUT)); //drive to pivot point
-		AddSequential(new WaitTime(.5));
+		AddSequential(new DistanceDriveCommand2(DRIVE_TO_TURN - BACK_HALF_LENGTH, 1.0, BIG_TIME_OUT)); //drive to pivot point
 		AddSequential(new SolenoidClaspCommand(1, SPEED_SOLENOID)); //low gear
 		AddSequential(new Turn(-1*TURN_DEGREES)); //turn robot
-		//AddSequential(new Turn(RobotMap::angleFromCamera));
-		AddSequential(new WaitTime(.5));
-		AddSequential(
-				new DistanceDriveCommand2(DRIVE_TO_PEG - FRONT_HALF_LENGTH + 4,
-						0.6, BIG_TIME_OUT)); //drive to peg
-		AddSequential(new WaitTime(.5)); //wait
+		AddSequential(new DistanceDriveCommand2(DRIVE_TO_PEG - FRONT_HALF_LENGTH + 4, 0.75, BIG_TIME_OUT)); //drive to peg
+		//AddSequential(new WaitTime(.5)); //wait
 		//AddSequential(new SolenoidClaspCommand(1, OPENCLOSE_SOLENOID)); //open
-		AddSequential(new WaitTime(.5)); //wait
+		//AddSequential(new WaitTime(.5)); //wait
 		//AddSequential(new DistanceDriveCommand2(-1 * (DRIVE_TO_PEG - FRONT_HALF_LENGTH), 0.5, BIG_TIME_OUT)); //drive back
 		/*
 		 AddSequential(new Turn(59.9f));

@@ -70,6 +70,7 @@ public:
 	static double driveP;
 	static double driveI;
 	static double driveD;
+	static double toleranceDegrees;
 
 	static void init();
 };
